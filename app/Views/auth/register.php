@@ -10,7 +10,7 @@
 <body>
     <h2>Registro</h2>
     <div class="contenedor">
-        <form action="<?= base_url('/registrar') ?>" method="post">
+        <form action="<?= base_url('auth/registrar') ?>" method="post">
             <div class="nombre">
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" require>

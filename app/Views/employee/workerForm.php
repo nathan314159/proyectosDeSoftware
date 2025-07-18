@@ -26,7 +26,7 @@
             </div>
             <button type="submit">Enviar</button>
         </form>
-        <a href="<?= base_url('/logout') ?>">Cerrar sesión</a>
+        <a href="<?= base_url('auth/logout') ?>">Cerrar sesión</a>
     </div>
 </body>
 

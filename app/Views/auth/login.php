@@ -15,7 +15,7 @@
     <?php endif; ?>
 
     <div class="contenedor">
-        <form action="<?= base_url('iniciar-sesion') ?>" method="post">
+        <form action="<?= base_url('auth/login') ?>" method="POST">
             <div class="cedula">
                 <label for="cedula">Cedula</label>
                 <input type="text" name="cedula" id="cedula" require>
@@ -27,7 +27,7 @@
             <button type="submit">Ingresar</button>
         </form>
         <div class="link">
-            <a href="<?= base_url('/registro') ?>">Registrarse</a>
+            <a href="<?= base_url('auth/registro') ?>">Registrarse</a>
         </div>
     </div>
 </body>

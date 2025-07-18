@@ -22,7 +22,7 @@ class RegisterController extends BaseController
         $password = $this->request->getPost('password');
 
         if ($model->where('users_cedula', $cedula)->first()) {
-            return redirect()->to('/registro')->with('error', 'La cédula ya está registrada.');
+            return redirect()->to('auth/registro')->with('error', 'La cédula ya está registrada.');
         }
 
         $data = [
@@ -34,7 +34,7 @@ class RegisterController extends BaseController
 
         $model->insert($data);
 
-        return redirect()->to('/login')->with('mensaje', 'Usuario registrado con éxito');
+        return redirect()->to('auth/login')->with('mensaje', 'Usuario registrado con éxito');
     }
 
 }
