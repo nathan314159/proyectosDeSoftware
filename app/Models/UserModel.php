@@ -19,10 +19,15 @@ class UserModel extends Model
     {
         // Inserta un nuevo usuario
         $this->insert($data);
-
         // Devuelve el usuario insertado por cédula (suponiendo que 'users_cedula' está en $data)
         return $this->where('users_cedula', $data['users_cedula'])->first();
     }
 
-
+        public function showUsers()
+    {
+        $builder =$this->select("id_users, users_nombre, users_apellido, users_cedula");
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+    
 }

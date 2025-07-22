@@ -14,9 +14,13 @@ $routes->group('auth', function ($routes) {
     $routes->post('registrar', 'Auth\RegisterController::registerForm');
 });
 
-/**
- * Área de empleados (restringido a usuarios autenticados)
- */
+$routes->group('admin', function ($routes) {
+    $routes->get('/', 'admin\AdminController::viewRolls');
+    $routes->get('assignRolls', 'admin\AdminController::assignRolls');
+    $routes->post('assignRolls', 'admin\AdminController::assignRolls');
+
+});
+
 $routes->group('empleado', function ($routes) {
     $routes->get('/', 'Employee\EmployeeController::workerForm');
 });

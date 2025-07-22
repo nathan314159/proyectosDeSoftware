@@ -32,9 +32,12 @@ class RegisterController extends BaseController
             'users_password' => $password
         ];
 
-        $model->insert($data);
+        
+        if($model->insert($data)){
+            echo "1";
+        }
 
-        return redirect()->to('auth/login')->with('mensaje', 'Usuario registrado con éxito');
+        // return redirect()->to('auth/login')->with('mensaje', 'Usuario registrado con éxito');
     }
 
 }
