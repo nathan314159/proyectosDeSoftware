@@ -25,3 +25,10 @@ $routes->group('admin', function ($routes) {
 $routes->group('empleado', function ($routes) {
     $routes->get('/', 'Employee\EmployeeController::workerForm');
 });
+
+$routes->group('api', function ($routes) {
+    $routes->get('restaurantes', 'proyectosSoftware\semana13\RestauranteController::index');
+    $routes->post('restaurantes', 'proyectosSoftware\semana13\RestauranteController::create');
+    $routes->put('restaurantes/(:num)', 'proyectosSoftware\semana13\RestauranteController::update/$1');
+    $routes->delete('restaurantes/(:num)', 'proyectosSoftware\semana13\RestauranteController::delete/$1');
+});
