@@ -14,19 +14,21 @@ class AdminController extends BaseController
     {
         $userModel = new UserModel();
         $rolModel = new RolModel();
+        $UserRolModel = new UserRolModel();
 
         $user = $userModel->showUsers();
         $rol = $rolModel->showRols();
+        $userRoles = $UserRolModel->showUserRol();
 
         $data = [
             "users" => $user,
             "roles" => $rol,
+            "userRoles" => $userRoles,
         ];
-        // dd($data['roles']);
+        // print_r(["userRoles" => $userRoles]);
+        // dd($data);
         return view('admin/assignRolls/index', $data);
     }
-
-
 
     public function assignRolls()
     {
@@ -41,14 +43,28 @@ class AdminController extends BaseController
                 'id_rol'             => $roleId,
                 'user_rol_estado'    => 1, // or 1
                 'user_rol_created_at' => date('Y-m-d H:i:s'),
-                
             ];
 
             $userRolModel->insertRol($data);
 
             return redirect()->to('admin/assignRolls')->with('success', 'Rol asignado correctamente.');
         }
-
         return redirect()->back()->with('error', 'Debe seleccionar usuario y rol.');
+    }
+
+    public function showUserRol()
+    {
+        $userRolModel = new UserRolModel();
+        $data['userRoles'] = $userRolModel->showRol();
+        // print_r($data['userRoles']);
+        return view('admin/assignRolls/index', $data);
+    }
+
+    public function deleteUserRol($id_users_rol)
+    {
+        $userRolModel = new UserRolModel();
+        $userRolModel->delete($id_users_rol);
+
+        return redirect()->to('admin/')->with('success', 'Rol eliminado correctamente.');
     }
 }

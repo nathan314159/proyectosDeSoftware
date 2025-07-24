@@ -18,7 +18,8 @@ $routes->group('admin', function ($routes) {
     $routes->get('/', 'admin\AdminController::viewRolls');
     $routes->get('assignRolls', 'admin\AdminController::assignRolls');
     $routes->post('assignRolls', 'admin\AdminController::assignRolls');
-
+    $routes->get('assignRolls', 'admin\AdminController::showUserRol');
+    $routes->post('deleteUserRol/(:num)', 'admin\AdminController::deleteUserRol/$1');
 });
 
 $routes->group('empleado', function ($routes) {
