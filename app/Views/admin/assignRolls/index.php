@@ -94,9 +94,9 @@
                     <label for="user">User</label>
                     <select name="user" id="user">
                         <option value="">Ninguno</option>
-                        <?php foreach ($userRoles as $userRole): ?>
-                            <option value="<?= esc($userRole['id_users']) ?>">
-                                <?= esc($userRole['users_nombre'] . ' ' . $userRole['users_apellido']) ?>
+                        <?php foreach ($users as $user): ?>
+                            <option value="<?= esc($user['id_users']) ?>">
+                                <?= esc($user['users_nombre'] . ' ' . $user['users_apellido']) ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -106,9 +106,9 @@
                     <label for="role">Role</label>
                     <select name="role" id="role">
                         <option value="">Ninguno</option>
-                        <?php foreach ($userRoles as $userRole): ?>
-                            <option value="<?= esc($userRole['id_rol']) ?>">
-                                <?= esc($userRole['rol_nombre']) ?>
+                        <?php foreach ($roles as $role): ?>
+                            <option value="<?= esc($role['id_rol']) ?>">
+                                <?= esc($role['rol_nombre']) ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -137,8 +137,10 @@
                             <?php foreach ($userRoles as $row): ?>
                                 <tr>
                                     <td><?= esc($contador) ?></td>
-                                    <td><?= esc($row['id_users']) ?></td>
-                                    <td><?= esc($row['id_rol']) ?></td>
+                                    <td hidden><?= esc($row['id_users']) ?></td>
+                                    <td hidden><?= esc($row['id_rol']) ?></td>
+                                    <td><?= esc($row['users_nombre']) . " " . esc($row['users_apellido']) ?></td>
+                                    <td><?= esc($row['rol_nombre']) ?></td>
                                     <td>
                                         <form action="<?= base_url('admin/deleteUserRol/' . $row['id_users_rol']) ?>" method="post" onsubmit="return confirm('¿Estás seguro de eliminar este rol?');">
                                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
