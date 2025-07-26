@@ -70,7 +70,15 @@ class AdminController extends BaseController
     }
 
     public function edit($id)
-    {   
-        return view('admin/assignRolls/edit');
-    }
+{
+    $userRolModel = new UserRolModel();
+    $userModel = new UserModel(); // Model for users
+    $roleModel = new RolModel(); // Model for roles
+
+    $data['userRole'] = $userRolModel->find($id); // Single assignment
+    $data['users'] = $userModel->findAll();
+    $data['roles'] = $roleModel->findAll();
+
+    return view('admin/assignRolls/edit', $data);
+}
 }
