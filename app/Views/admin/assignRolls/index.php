@@ -94,9 +94,9 @@
                     <label for="user">User</label>
                     <select name="user" id="user">
                         <option value="">Ninguno</option>
-                        <?php foreach ($users as $user): ?>
-                            <option value="<?= esc($user['id_users']) ?>">
-                                <?= esc($user['users_nombre'] . ' ' . $user['users_apellido']) ?>
+                        <?php foreach ($userRoles as $userRole): ?>
+                            <option value="<?= esc($userRole['id_users']) ?>">
+                                <?= esc($userRole['users_nombre'] . ' ' . $userRole['users_apellido']) ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -106,9 +106,9 @@
                     <label for="role">Role</label>
                     <select name="role" id="role">
                         <option value="">Ninguno</option>
-                        <?php foreach ($roles as $role): ?>
-                            <option value="<?= esc($role['id_rol']) ?>">
-                                <?= esc($role['rol_nombre']) ?>
+                        <?php foreach ($userRoles as $userRole): ?>
+                            <option value="<?= esc($userRole['id_rol']) ?>">
+                                <?= esc($userRole['rol_nombre']) ?>
                             </option>
                         <?php endforeach; ?>
                     </select>

@@ -52,14 +52,14 @@ class AdminController extends BaseController
         return redirect()->back()->with('error', 'Debe seleccionar usuario y rol.');
     }
 
+
     public function showUserRol()
     {
         $userRolModel = new UserRolModel();
-        $data['userRoles'] = $userRolModel->showRol();
-        // print_r($data['userRoles']);
+        $data['userRoles'] = $userRolModel->showUserRol(); // <-- corrected method name
+        // dd($data['userRoles']);
         return view('admin/assignRolls/index', $data);
     }
-
     public function deleteUserRol($id_users_rol)
     {
         $userRolModel = new UserRolModel();

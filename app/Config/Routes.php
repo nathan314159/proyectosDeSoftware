@@ -14,11 +14,12 @@ $routes->group('auth', function ($routes) {
     $routes->post('registrar', 'Auth\RegisterController::registerForm');
 });
 
+
 $routes->group('admin', function ($routes) {
     $routes->get('/', 'admin\AdminController::viewRolls');
     $routes->get('assignRolls', 'admin\AdminController::assignRolls');
     $routes->post('assignRolls', 'admin\AdminController::assignRolls');
-    $routes->get('assignRolls', 'admin\AdminController::showUserRol');
+    $routes->get('showUserRol', 'admin\AdminController::showUserRol'); // changed URI
     $routes->post('deleteUserRol/(:num)', 'admin\AdminController::deleteUserRol/$1');
 });
 
