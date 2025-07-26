@@ -70,15 +70,28 @@ class AdminController extends BaseController
     }
 
     public function edit($id)
-{
-    $userRolModel = new UserRolModel();
-    $userModel = new UserModel(); // Model for users
-    $roleModel = new RolModel(); // Model for roles
+    {
+        $userRolModel = new UserRolModel();
+        $userModel = new UserModel(); // Model for users
+        $roleModel = new RolModel(); // Model for roles
 
-    $data['userRole'] = $userRolModel->find($id); // Single assignment
-    $data['users'] = $userModel->findAll();
-    $data['roles'] = $roleModel->findAll();
+        $data['userRole'] = $userRolModel->find($id); // Single assignment
+        $data['users'] = $userModel->findAll();
+        $data['roles'] = $roleModel->findAll();
 
-    return view('admin/assignRolls/edit', $data);
-}
+        return view('admin/assignRolls/edit', $data);
+    }
+
+    public function update($id)
+    {
+        $userRolModel = new UserRolModel();
+        $newRoleId = $this->request->getPost('role');
+        $userRolModel->update($id, [
+            'id_rol' => $newRoleId
+        ]);
+        return redirect()->to(base_url('admin/'))->with('success', 'Rol actualizado correctamente.');
+
+
+
+    }
 }

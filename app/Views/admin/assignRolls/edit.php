@@ -13,7 +13,7 @@
     <div class="wrapper">
         <div class="asignar-rol">
             <h2>Editar asignación de rol</h2>
-            <form action="<?= base_url('admin/editUserRol/' . $userRole['id_users_rol']) ?>" method="POST">
+            <form action="<?= base_url('admin/updateUserRol/' . $userRole['id_users_rol']) ?>" method="POST">
                 <div class="container">
                     <label for="user">User</label>
                     <select name="user" id="user" disabled>
