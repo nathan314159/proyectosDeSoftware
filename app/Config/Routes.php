@@ -19,8 +19,9 @@ $routes->group('admin', function ($routes) {
     $routes->get('/', 'admin\AdminController::viewRolls');
     $routes->get('assignRolls', 'admin\AdminController::assignRolls');
     $routes->post('assignRolls', 'admin\AdminController::assignRolls');
-    $routes->get('showUserRol', 'admin\AdminController::showUserRol'); // changed URI
+    $routes->get('showUserRol', 'admin\AdminController::showUserRol'); 
     $routes->post('deleteUserRol/(:num)', 'admin\AdminController::deleteUserRol/$1');
+    $routes->post('editUserRol/(:num)', 'admin\AdminController::edit/$1');
 });
 
 $routes->group('empleado', function ($routes) {

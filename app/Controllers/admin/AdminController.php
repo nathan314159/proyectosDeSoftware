@@ -60,11 +60,17 @@ class AdminController extends BaseController
         // dd($data['userRoles']);
         return view('admin/assignRolls/index', $data);
     }
+
     public function deleteUserRol($id_users_rol)
     {
         $userRolModel = new UserRolModel();
         $userRolModel->delete($id_users_rol);
 
         return redirect()->to('admin/')->with('success', 'Rol eliminado correctamente.');
+    }
+
+    public function edit($id)
+    {   
+        return view('admin/assignRolls/edit');
     }
 }

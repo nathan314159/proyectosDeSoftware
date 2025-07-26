@@ -143,6 +143,9 @@
                                         <form action="<?= base_url('admin/deleteUserRol/' . $row['id_users_rol']) ?>" method="post" onsubmit="return confirm('¿Estás seguro de eliminar este rol?');">
                                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                         </form>
+                                        <form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="post" );">
+                                            <button type="submit" class="btn btn-danger btn-sm">Actualizar</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php $contador++; ?>
