@@ -47,7 +47,8 @@ class AdminController extends BaseController
 
             $userRolModel->insertRol($data);
 
-            return redirect()->to('admin/assignRolls')->with('success', 'Rol asignado correctamente.');
+            // return redirect()->to('admin/assignRolls')->with('success', 'Rol asignado correctamente.');
+            return 1;
         }
         return redirect()->back()->with('error', 'Debe seleccionar usuario y rol.');
     }
