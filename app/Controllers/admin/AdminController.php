@@ -62,13 +62,18 @@ class AdminController extends BaseController
         return view('admin/assignRolls/index', $data);
     }
 
-    public function deleteUserRol($id_users_rol)
+    public function deleteUserRol()
     {
-        $userRolModel = new UserRolModel();
-        $userRolModel->delete($id_users_rol);
 
-        return redirect()->to('admin/')->with('success', 'Rol eliminado correctamente.');
+        $model = new UserRolModel();
+        $model->delete($this->request->getGET('id'));
+        return $this->response->setJSON(['status' => 'ok']);
+
+
+        // return $this->response->setStatusCode(405)->setJSON(['error' => 'Método no permitido']);
     }
+
+
 
     public function edit($id)
     {
@@ -91,8 +96,5 @@ class AdminController extends BaseController
             'id_rol' => $newRoleId
         ]);
         return redirect()->to(base_url('admin/'))->with('success', 'Rol actualizado correctamente.');
-
-
-
     }
 }

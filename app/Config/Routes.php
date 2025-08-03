@@ -21,7 +21,7 @@ $routes->group('admin', function ($routes) {
     $routes->get('assignRolls', 'admin\AdminController::assignRolls');
     $routes->post('assignRolls', 'admin\AdminController::assignRolls');
     $routes->get('showUserRol', 'admin\AdminController::showUserRol');
-    $routes->post('deleteUserRol/(:num)', 'admin\AdminController::deleteUserRol/$1');
+    $routes->get('deleteUserRol', 'admin\AdminController::deleteUserRol');
     $routes->post('editUserRol/(:num)', 'admin\AdminController::edit/$1');
     $routes->post('updateUserRol/(:num)', 'admin\AdminController::update/$1');
 });

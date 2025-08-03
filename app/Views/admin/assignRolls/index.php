@@ -96,7 +96,7 @@ contra#_222z
     <div class="wrapper">
         <div class="asignar-rol">
             <h2>Asignar rol</h2>
-            <form action="<?= base_url('admin/assignRolls') ?>" method="POST">
+            <form id="formulario" action="<?= base_url('admin/assignRolls') ?>" method="POST">
                 <div class="container">
                     <label for="user">User</label>
                     <select name="user" id="user">
@@ -149,10 +149,14 @@ contra#_222z
                                     <td><?= esc($row['users_nombre']) . " " . esc($row['users_apellido']) ?></td>
                                     <td><?= esc($row['rol_nombre']) ?></td>
                                     <td>
-                                        <form action="<?= base_url('admin/deleteUserRol/' . $row['id_users_rol']) ?>" method="post" onsubmit="return confirm('¿Estás seguro de eliminar este rol?');">
-                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        <form class="delete-form"
+                                            action="<?= base_url('admin/deleteUserRol') ?>"
+                                            method="GET">
+                                            <input type="hidden" name="id_users_rol" value="<?= esc($row['id_users_rol']) ?>">
+                                            <button type="submit">Eliminar</button>
                                         </form>
-                                        <form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="post" );">
+
+                                        <form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="POST" );">
                                             <button type="submit" class="btn btn-danger btn-sm">Actualizar</button>
                                         </form>
                                     </td>
