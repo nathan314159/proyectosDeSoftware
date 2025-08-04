@@ -10,6 +10,10 @@ contra#_222z
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <title>Assign Roles</title>
     <style>
@@ -144,8 +148,8 @@ contra#_222z
                             <?php foreach ($userRoles as $row): ?>
                                 <tr>
                                     <td><?= esc($contador) ?></td>
-                                    <td hidden><?= esc($row['id_users']) ?></td>
-                                    <td hidden><?= esc($row['id_rol']) ?></td>
+                                    <td hidden><?= esc($row['id_users']) ?><input type="hidden" name="id_users_rol" value=<?= esc($row['id_users']) ?>></td>
+                                    <td hidden><?= esc($row['id_rol']) ?><input type="hidden" name="id_rol" value=<?= esc($row['id_rol']) ?>></td>
                                     <td><?= esc($row['users_nombre']) . " " . esc($row['users_apellido']) ?></td>
                                     <td><?= esc($row['rol_nombre']) ?></td>
                                     <td>
@@ -156,9 +160,10 @@ contra#_222z
                                             <button type="submit">Eliminar</button>
                                         </form>
 
-                                        <form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="POST" );">
-                                            <button type="submit" class="btn btn-danger btn-sm">Actualizar</button>
-                                        </form>
+                                        <!--<form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="POST" );">-->
+                                        <button type="button" class="btnActualizar btn btn-danger btn-sm">Actualizar</button>
+
+                                        <!--</form>-->
                                     </td>
                                 </tr>
                                 <?php $contador++; ?>
@@ -170,6 +175,53 @@ contra#_222z
                         <?php endif; ?>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal para editar -->
+    <div class="modal fade" id="modalParentesco" tabindex="-1" aria-labelledby="modalParentescoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalParentescoLabel">Detalles del Parentesco</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2>Editar asignación de rol</h2>
+                    <form id="form-edit">
+
+
+                        <div class="container">
+                            <label for="user">User</label>
+                            <select name="user" id="user" disabled>
+                                <?php foreach ($users as $user): ?>
+                                    <option value="<?= esc($user['id_users']) ?>"
+
+                                        <?= esc($user['users_nombre'] . ' ' . $user['users_apellido']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="container">
+                            <label for="role">Role</label>
+                            <select name="role" id="role">
+                                <?php foreach ($roles as $role): ?>
+                                    <option value="<?= esc($role['id_rol']) ?>"
+
+                                        <?= esc($role['rol_nombre']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <button type="submit">Actualizar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>

@@ -28,6 +28,8 @@ class AdminController extends BaseController
         // print_r(["userRoles" => $userRoles]);
         // dd($data);
         return view('admin/assignRolls/index', $data);
+
+        //print_r($data);
     }
 
     public function assignRolls()
@@ -74,27 +76,51 @@ class AdminController extends BaseController
     }
 
 
+    // public function edit($id)
+    // {
+    //     $userRolModel = new UserRolModel();
+    //     $userModel = new UserModel(); // Model for users
+    //     $roleModel = new RolModel(); // Model for roles
 
-    public function edit($id)
+    //     $data['userRole'] = $userRolModel->find($id); // Single assignment
+    //     $data['users'] = $userModel->findAll();
+    //     $data['roles'] = $roleModel->findAll();
+
+    //     return view('admin/assignRolls/edit', $data);
+    // }
+
+    // public function update($id)
+    // {
+    //     $userRolModel = new UserRolModel();
+    //     $newRoleId = $this->request->getPost('role');
+    //     $userRolModel->update($id, [
+    //         'id_rol' => $newRoleId
+    //     ]);
+    //     return redirect()->to(base_url('admin/'))->with('success', 'Rol actualizado correctamente.');
+    // }
+
+    public function updateUserRol()
     {
-        $userRolModel = new UserRolModel();
-        $userModel = new UserModel(); // Model for users
-        $roleModel = new RolModel(); // Model for roles
+        $id = $this->request->getPost('id_users_rol');
+        $newRole = $this->request->getPost('role');
 
-        $data['userRole'] = $userRolModel->find($id); // Single assignment
-        $data['users'] = $userModel->findAll();
-        $data['roles'] = $roleModel->findAll();
+        log_message('debug', 'ID recibido: ' . $id);
+        log_message('debug', 'Nuevo rol recibido: ' . $newRole);
 
-        return view('admin/assignRolls/edit', $data);
-    }
+        if (!$id || !$newRole) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Datos incompletos']);
+        }
 
-    public function update($id)
-    {
-        $userRolModel = new UserRolModel();
-        $newRoleId = $this->request->getPost('role');
-        $userRolModel->update($id, [
-            'id_rol' => $newRoleId
+        $userRolModel = new \App\Models\UserRolModel();
+
+        $updated = $userRolModel->update($id, [
+            'id_rol' => $newRole
         ]);
-        return redirect()->to(base_url('admin/'))->with('success', 'Rol actualizado correctamente.');
+
+        if (!$updated) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo actualizar el rol']);
+        }
+
+        return $this->response->setJSON(['status' => 'ok', 'message' => 'Rol actualizado']);
     }
 }
