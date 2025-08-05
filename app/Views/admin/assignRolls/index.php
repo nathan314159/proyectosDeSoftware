@@ -162,7 +162,6 @@ contra#_222z
 
                                         <!--<form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="POST" );">-->
                                         <button type="button" class="btnActualizar btn btn-danger btn-sm">Actualizar</button>
-
                                         <!--</form>-->
                                     </td>
                                 </tr>
@@ -192,28 +191,28 @@ contra#_222z
                 <div class="modal-body">
                     <h2>Editar asignación de rol</h2>
                     <form id="form-edit">
-
+                        <input type="hidden" name="id_users_rol" id="id_users_rol">
 
                         <div class="container">
                             <label for="user">User</label>
                             <select name="user" id="user" disabled>
                                 <?php foreach ($users as $user): ?>
-                                    <option value="<?= esc($user['id_users']) ?>"
+                                    <option value="<?= esc($user['id_users']) ?>">
 
                                         <?= esc($user['users_nombre'] . ' ' . $user['users_apellido']) ?>
-                                        </option>
-                                    <?php endforeach; ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="container">
                             <label for="role">Role</label>
                             <select name="role" id="role">
                                 <?php foreach ($roles as $role): ?>
-                                    <option value="<?= esc($role['id_rol']) ?>"
+                                    <option value="<?= esc($role['id_rol']) ?>">
 
                                         <?= esc($role['rol_nombre']) ?>
-                                        </option>
-                                    <?php endforeach; ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <button type="submit">Actualizar</button>

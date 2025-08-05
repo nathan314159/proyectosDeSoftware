@@ -79,33 +79,29 @@ $(document).ready(function () {
         // Obtiene los valores desde esa fila
         const id = row.find("input[name='id_users_rol']").val();
         const role = row.find("input[name='id_rol']").val(); // O puedes usar un <select> si lo tienes
+  
 
         console.log("ID del rol:", id);
         console.log("Nuevo rol:", role);
 
         let baseURL = window.document.location.origin + "/" + window.location.pathname.split("/")[1];
 
-
-
         $("#modalParentesco").modal("show");
-
-        // $.ajax({
-        //     data: {
-        //         id_users_rol: id,
-        //         role: role
-        //     },
-        //     url: baseURL + "/admin/updateUserRol",
-        //     type: "POST",
-        //     success: function (response) {
-        //         console.log("Respuesta del servidor:", response);
-        //         //location.reload();
-        //     },
-        //     error: function (xhr, status, error) {
-        //         alert("Error al actualizar el rol");
-        //     }
-        // });
-
-
+        $.ajax({
+            data: {
+                id_users_rol: id,
+                role: role
+            },
+            url: baseURL + "/admin/updateUserRol",
+            type: "POST",
+            success: function (response) {
+                console.log("Respuesta del servidor:", response);
+                //location.reload();
+            },
+            error: function (xhr, status, error) {
+                alert("Error al actualizar el rol");
+            }
+        });
     });
 });
 
