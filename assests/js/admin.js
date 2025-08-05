@@ -70,40 +70,56 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $(".btnActualizar").click(function (e) {
-        e.preventDefault();
 
-        // Encuentra la fila <tr> más cercana al botón clicado
+    $(".btnActualizar").click(function () {
         const row = $(this).closest("tr");
 
-        // Obtiene los valores desde esa fila
-        const id = row.find("input[name='id_users_rol']").val();
-        const role = row.find("input[name='id_rol']").val(); // O puedes usar un <select> si lo tienes
-  
+        const idUsersRol = row.find(".id_users_rol").val();
+        const idUsers = row.find(".id_users").val();
+        const idRol = row.find(".id_rol").val();
 
-        console.log("ID del rol:", id);
-        console.log("Nuevo rol:", role);
+        // Pre-fill modal fields
+        $("#edit_id_users_rol").val(idUsersRol);
+        $("#edit_user").val(idUsers);   // Selects correct user
+        $("#edit_role").val(idRol);     // Selects correct role
+
+        // Show modal
+        $("#modalParentesco").modal("show");
+    });
+
+
+    // Envío del formulario con AJAX
+    $("#form-edit").submit(function (e) {
+        e.preventDefault();
+
+        const id = $("#id_users_rol").val();
+        const role = $("#role").val();
 
         let baseURL = window.document.location.origin + "/" + window.location.pathname.split("/")[1];
 
-        $("#modalParentesco").modal("show");
         $.ajax({
+            url: baseURL + "/admin/updateUserRol",
+            type: "POST",
             data: {
                 id_users_rol: id,
                 role: role
+
             },
-            url: baseURL + "/admin/updateUserRol",
-            type: "POST",
             success: function (response) {
-                console.log("Respuesta del servidor:", response);
-                //location.reload();
+                // console.log("Respuesta del servidor:", response);
+                console.log("id_users_rol:", id_users_rol);
+                console.log("role:", role);
+                $("#modalParentesco").modal("hide");
+                // Opcional: actualizar la tabla sin recargar
+                // location.reload();
             },
             error: function (xhr, status, error) {
-                alert("Error al actualizar el rol");
+                alert("Error al actualizar el rol: " + error);
             }
         });
     });
 });
+
 
 
 

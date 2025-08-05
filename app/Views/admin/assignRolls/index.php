@@ -148,10 +148,14 @@ contra#_222z
                             <?php foreach ($userRoles as $row): ?>
                                 <tr>
                                     <td><?= esc($contador) ?></td>
-                                    <td hidden><?= esc($row['id_users']) ?><input type="hidden" name="id_users_rol" value=<?= esc($row['id_users']) ?>></td>
-                                    <td hidden><?= esc($row['id_rol']) ?><input type="hidden" name="id_rol" value=<?= esc($row['id_rol']) ?>></td>
                                     <td><?= esc($row['users_nombre']) . " " . esc($row['users_apellido']) ?></td>
                                     <td><?= esc($row['rol_nombre']) ?></td>
+
+                                    <!-- Hidden data for JS Add hidden inputs outside of <td> so you can access them via JS. -->
+                                    <input type="hidden" class="id_users_rol" value="<?= esc($row['id_users_rol']) ?>">
+                                    <input type="hidden" class="id_users" value="<?= esc($row['id_users']) ?>">
+                                    <input type="hidden" class="id_rol" value="<?= esc($row['id_rol']) ?>">
+
                                     <td>
                                         <form class="delete-form"
                                             action="<?= base_url('admin/deleteUserRol') ?>"
@@ -188,28 +192,27 @@ contra#_222z
                         <span class="text-white" aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
                     <h2>Editar asignación de rol</h2>
                     <form id="form-edit">
                         <input type="hidden" name="id_users_rol" id="id_users_rol">
 
                         <div class="container">
-                            <label for="user">User</label>
-                            <select name="user" id="user" disabled>
+                            <label for="edit_user">Usuario</label>
+                            <select name="user" id="edit_user" disabled>
                                 <?php foreach ($users as $user): ?>
                                     <option value="<?= esc($user['id_users']) ?>">
-
                                         <?= esc($user['users_nombre'] . ' ' . $user['users_apellido']) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="container">
-                            <label for="role">Role</label>
-                            <select name="role" id="role">
+                            <label for="edit_role">Rol</label>
+                            <select name="role" id="edit_role">
                                 <?php foreach ($roles as $role): ?>
                                     <option value="<?= esc($role['id_rol']) ?>">
-
                                         <?= esc($role['rol_nombre']) ?>
                                     </option>
                                 <?php endforeach; ?>

@@ -31,4 +31,6 @@ class UserRolModel extends Model
     {
         return $this->delete($id);
     }
+
+    
 }
