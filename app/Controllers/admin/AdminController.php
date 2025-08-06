@@ -107,18 +107,16 @@ class AdminController extends BaseController
         log_message('debug', 'ID recibido: ' . $id);
         log_message('debug', 'Nuevo rol recibido: ' . $newRole);
 
-        // if (!$id || !$newRole) {
-        //     return $this->response->setJSON(['status' => 'error', 'message' => 'Datos incompletos']);
-        // }
+        if (!$id || !$newRole) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Datos incompletos']);
+        }
 
         $userRolModel = new \App\Models\UserRolModel();
 
         $updated = $userRolModel->update($id, ['id_rol' => $newRole]);
-        dd($updated);
-        if (!$updated) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo actualizar el rol']);
-        }
+        return  $updated ? 
+            $this->response->setJSON(['status' => 'ok', 'message' => 'Rol actualizado']) : 
+            $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo actualizar el rol']);
 
-        return $this->response->setJSON(['status' => 'ok', 'message' => 'Rol actualizado']);
     }
 }

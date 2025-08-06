@@ -196,7 +196,7 @@ contra#_222z
                 <div class="modal-body">
                     <h2>Editar asignación de rol</h2>
                     <form id="form-edit">
-                        <input type="hidden" name="id_users_rol" id="id_users_rol">
+                        <input type="hidden" name="id_users_rol" id="edit_id_users_rol">
 
                         <div class="container">
                             <label for="edit_user">Usuario</label>

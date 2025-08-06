@@ -92,8 +92,12 @@ $(document).ready(function () {
     $("#form-edit").submit(function (e) {
         e.preventDefault();
 
-        const id = $("#id_users_rol").val();
-        const role = $("#role").val();
+        // const id = $("#id_users_rol").val();
+        // const role = $("#role").val();
+        let id = $("#edit_id_users_rol").val(); // ID corregido
+        let role = $("#edit_role").val();
+
+
 
         let baseURL = window.document.location.origin + "/" + window.location.pathname.split("/")[1];
 
@@ -103,18 +107,24 @@ $(document).ready(function () {
             data: {
                 id_users_rol: id,
                 role: role
-
             },
+            dataType: "json",
+
             success: function (response) {
+                console.log("Respuesta del servidor:", response);
+                // const id_users_rol = response;
                 // console.log("Respuesta del servidor:", response);
-                console.log("id_users_rol:", id_users_rol);
-                console.log("role:", role);
+                // console.log("id_users_rol:", id_users_rol);
+                // console.log("role:", role);
                 $("#modalParentesco").modal("hide");
                 // Opcional: actualizar la tabla sin recargar
-                // location.reload();
+                location.reload();
             },
             error: function (xhr, status, error) {
-                alert("Error al actualizar el rol: " + error);
+                console.log("Error al actualizar el rol: " + error);
+            //     console.log("xhr: " + xhr);
+            //     console.log("status: " + status);
+            //     console.log("Editando: ", id, role);
             }
         });
     });

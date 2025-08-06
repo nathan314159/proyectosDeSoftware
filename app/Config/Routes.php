@@ -26,7 +26,6 @@ $routes->group('admin', function ($routes) {
     // $routes->get('updateUserRol/(:num)', 'admin\AdminController::update/$1');
 
      $routes->post('updateUserRol', 'admin\AdminController::updateUserRol');
-//$routes->get('updateUserRol/(:num)/(:num)', 'AdminController::updateUserRol/$1/$2');
 
 
 });
