@@ -183,11 +183,11 @@ contra#_222z
     </div>
 
     <!-- modal para editar -->
-    <div class="modal fade" id="modalParentesco" tabindex="-1" aria-labelledby="modalParentescoLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAsignarRol" tabindex="-1" aria-labelledby="modalAsignarRolLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="modalParentescoLabel">Detalles del Parentesco</h5>
+                    <h5 class="modal-title" id="modalAsignarRolLabel">Detalles del Parentesco</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                         <span class="text-white" aria-hidden="true">&times;</span>
                     </button>

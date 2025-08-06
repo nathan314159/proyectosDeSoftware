@@ -84,7 +84,7 @@ $(document).ready(function () {
         $("#edit_role").val(idRol);     // Selects correct role
 
         // Show modal
-        $("#modalParentesco").modal("show");
+        $("#modalAsignarRol").modal("show");
     });
 
 
