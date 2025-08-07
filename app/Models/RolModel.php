@@ -19,7 +19,8 @@ class RolModel extends Model
 
     public function insertRoles($data)
     {
-        $this->insert($data);
-        return $this->where('users_cedula', $data['users_cedula'])->first();
+        $rolInsert = $this->insert($data);
+        return $rolInsert;
+        // return $this->where('users_cedula', $data['users_cedula'])->first();
     }
 }

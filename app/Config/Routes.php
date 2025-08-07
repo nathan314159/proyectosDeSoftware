@@ -17,17 +17,20 @@ $routes->group('auth', function ($routes) {
 
 
 $routes->group('admin', function ($routes) {
+
+    // usuario y roles
     $routes->get('/', 'admin\AdminController::viewRolls');
     $routes->get('assignRolls', 'admin\AdminController::assignRolls');
     $routes->post('assignRolls', 'admin\AdminController::assignRolls');
     $routes->get('showUserRol', 'admin\AdminController::showUserRol');
     $routes->get('deleteUserRol', 'admin\AdminController::deleteUserRol');
+    $routes->post('updateUserRol', 'admin\AdminController::updateUserRol');
     // $routes->get('editUserRol/(:num)', 'admin\AdminController::edit/$1');
     // $routes->get('updateUserRol/(:num)', 'admin\AdminController::update/$1');
+     
 
-     $routes->post('updateUserRol', 'admin\AdminController::updateUserRol');
-
-
+     // Roles
+    $routes->post('addRol', 'admin\AdminController::addRol');
 });
 
 

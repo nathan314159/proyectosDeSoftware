@@ -67,12 +67,7 @@ contra#_222z
             text-align: left;
         }
 
-        select,
-        label,
-        button {
-            display: block;
-            margin: 10px 0;
-        }
+
 
         .container {
             width: 100%;
@@ -84,13 +79,9 @@ contra#_222z
             width: 100%;
         }
 
-        button {
-            padding: 6px 12px;
-            cursor: pointer;
-        }
-
-        td button {
-            margin-right: 4px;
+        .acciones {
+            display: flex;
+            gap: 5px;
         }
     </style>
 </head>
@@ -156,17 +147,79 @@ contra#_222z
                                     <input type="hidden" class="id_users" value="<?= esc($row['id_users']) ?>">
                                     <input type="hidden" class="id_rol" value="<?= esc($row['id_rol']) ?>">
 
-                                    <td>
+                                    <td class="acciones">
                                         <form class="delete-form"
                                             action="<?= base_url('admin/deleteUserRol') ?>"
                                             method="GET">
                                             <input type="hidden" name="id_users_rol" value="<?= esc($row['id_users_rol']) ?>">
-                                            <button type="submit">Eliminar</button>
+                                            <button type="submit" class="btn btn-danger px-4">Eliminar</button>
                                         </form>
 
                                         <!--<form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="POST" );">-->
-                                        <button type="button" class="btnActualizar btn btn-danger btn-sm">Actualizar</button>
+                                        <button type="button" class="btnActualizar btn btn-warning btn-sm">Actualizar</button>
                                         <!--</form>-->
+                                    </td>
+                                </tr>
+                                <?php $contador++; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="2">No hay asignaciones de roles.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Crear Roles -->
+
+    <div class="wrapper">
+        <div class="asignar-rol">
+            <h2>Crear Roles</h2>
+
+            <form id="form-add-rol" action="<?= base_url('admin/addRol') ?>" method="post">
+                <input type="text" name="rol_nombre" placeholder="Nombre del rol" required>
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Agregar rol</button>
+            </form>
+
+        </div>
+
+        <div class="asignar-roles-table">
+            <h2>Roles Asignados</h2>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre del Rol</th>
+                            <th colspan="2">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php if (!empty($roles)): ?>
+                            <?php $contador = 1; ?>
+                            <?php foreach ($roles as $row): ?>
+                                <tr>
+                                    <td><?= esc($contador) ?></td>
+                                    <td><?= esc($row['rol_nombre']) ?></td>
+
+                                    <!-- Hidden data for JS Add hidden inputs outside of <td> so you can access them via JS. -->
+                                    <input type="hidden" class="id_rol" value="<?= esc($row['id_rol']) ?>">
+
+                                    <td class="acciones">
+                                        <form class="delete-form"
+                                            action="<?= base_url('admin/deleteUserRol') ?>"
+                                            method="GET">
+                                            <input type="hidden" name="id_rol" value="<?= esc($row['id_rol']) ?>">
+                                            <button type="submit" class="btn btn-danger px-4">Eliminar</button>
+                                        </form>
+
+                                        <button type="button" class="btnActualizar btn btn-warning btn-sm">Actualizar</button>
+
                                     </td>
                                 </tr>
                                 <?php $contador++; ?>

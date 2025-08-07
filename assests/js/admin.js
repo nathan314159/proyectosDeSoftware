@@ -35,7 +35,6 @@ $(document).ready(function () {
 });
 
 
-
 $(document).ready(function () {
     $(".delete-form").submit(function (e) {
         e.preventDefault(); // No envía el formulario de forma tradicional
@@ -130,6 +129,32 @@ $(document).ready(function () {
     });
 });
 
+// Roles
+
+$('#form-add-rol').on('submit', function(e) {
+    e.preventDefault();
+        let baseURL = window.document.location.origin + "/" + window.location.pathname.split("/")[1];
+
+    $.ajax({
+        url: baseURL + '/admin/addRol',
+        method: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+            if (response.status === 'success') {
+                alertify.success("Rol agregado exitosamente");
+
+                // Opcionalmente recargar solo la tabla de roles
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                console.log('Error: ' + response.message);
+            }
+        },
+        error: function(err) {
+            console.log('Error en la petición:', err);
+            alertify.error("Error al asignar el rol.");
+        }
+    });
+});
 
 
 

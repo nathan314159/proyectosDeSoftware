@@ -114,9 +114,30 @@ class AdminController extends BaseController
         $userRolModel = new \App\Models\UserRolModel();
 
         $updated = $userRolModel->update($id, ['id_rol' => $newRole]);
-        return  $updated ? 
-            $this->response->setJSON(['status' => 'ok', 'message' => 'Rol actualizado']) : 
+        return  $updated ?
+            $this->response->setJSON(['status' => 'ok', 'message' => 'Rol actualizado']) :
             $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo actualizar el rol']);
+    }
 
+    public function addRol()
+    {
+        $RolModel = new RolModel();
+
+        // Este debería ser el nombre del rol, como "Administrador"
+        $rolNombre = $this->request->getPost('rol_nombre');
+
+        // Validación básica
+        if (empty($rolNombre)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'El nombre del rol es obligatorio']);
+        }
+
+        $data = [
+            'rol_nombre' => $rolNombre
+        ];
+
+        // Insertar en la base de datos
+        // dd($data);
+        $RolModel->insertRoles($data);
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Rol agregado correctamente']);
     }
 }
