@@ -31,6 +31,7 @@ $routes->group('admin', function ($routes) {
 
      // Roles
     $routes->post('addRol', 'admin\AdminController::addRol');
+    $routes->post('deleteRol', 'admin\AdminController::deleteRol');
 });
 
 

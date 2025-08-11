@@ -8,7 +8,9 @@ class RolModel extends Model
 {
     protected $table = 'tbl_rol';
     protected $primaryKey = 'id_rol';
-    protected $allowedFields = ['rol_nombre'];
+    protected $allowedFields = ['rol_nombre, rol_estado, rol_created_at'];
+
+
 
     public function showRols()
     {
@@ -22,5 +24,12 @@ class RolModel extends Model
         $rolInsert = $this->insert($data);
         return $rolInsert;
         // return $this->where('users_cedula', $data['users_cedula'])->first();
+    }
+
+    public function deleteRols($estado, $id)
+    {
+        return $this->db->table('tbl_rol')
+            ->where('id_rol', $id)
+            ->update(['rol_estado' => $estado]);
     }
 }

@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\RolModel;
 use App\Models\UserRolModel;
+use CodeIgniter\CLI\Console;
 
 class AdminController extends BaseController
 {
@@ -119,6 +120,8 @@ class AdminController extends BaseController
             $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo actualizar el rol']);
     }
 
+
+    // Métodos para rol
     public function addRol()
     {
         $RolModel = new RolModel();
@@ -140,4 +143,25 @@ class AdminController extends BaseController
         $RolModel->insertRoles($data);
         return $this->response->setJSON(['status' => 'success', 'message' => 'Rol agregado correctamente']);
     }
+
+public function deleteRol()
+{
+    $id = $this->request->getPost('id_rol');
+
+    // We want to set the role as inactive (soft delete)
+    $estado = 0;
+
+    $model = new RolModel();
+    $deleted = $model->deleteRols($estado, $id);
+
+    if ($deleted) {
+        return $this->response->setJSON(['status' => 'success']);
+    } else {
+        return $this->response->setStatusCode(500)->setJSON([
+            'status' => 'error',
+            'message' => 'No se pudo cambiar el estado del rol'
+        ]);
+    }
+}
+
 }

@@ -179,14 +179,13 @@ contra#_222z
     <div class="wrapper">
         <div class="asignar-rol">
             <h2>Crear Roles</h2>
-
             <form id="form-add-rol" action="<?= base_url('admin/addRol') ?>" method="post">
                 <input type="text" name="rol_nombre" placeholder="Nombre del rol" required>
                 <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Agregar rol</button>
             </form>
 
         </div>
-
+        <!-- table Roles -->
         <div class="asignar-roles-table">
             <h2>Roles Asignados</h2>
             <div class="table-scroll">
@@ -211,10 +210,11 @@ contra#_222z
                                     <input type="hidden" class="id_rol" value="<?= esc($row['id_rol']) ?>">
 
                                     <td class="acciones">
-                                        <form class="delete-form"
-                                            action="<?= base_url('admin/deleteUserRol') ?>"
-                                            method="GET">
-                                            <input type="hidden" name="id_rol" value="<?= esc($row['id_rol']) ?>">
+                                        <form 
+                                            class="form-delete-rol"
+                                            action="<?= base_url('admin/deleteRol') ?>"
+                                            method="POST">
+                                            <input type="hidden" name="id_rol" id="id_rol" value="<?= esc($row['id_rol']) ?>">
                                             <button type="submit" class="btn btn-danger px-4">Eliminar</button>
                                         </form>
 
