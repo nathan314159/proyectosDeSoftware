@@ -8,7 +8,7 @@ class RolModel extends Model
 {
     protected $table = 'tbl_rol';
     protected $primaryKey = 'id_rol';
-    protected $allowedFields = ['rol_nombre, rol_estado, rol_created_at'];
+    protected $allowedFields = ['rol_nombre', 'rol_estado', 'rol_created_at'];
 
 
 
