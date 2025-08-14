@@ -125,17 +125,14 @@ class AdminController extends BaseController
     public function addRol()
     {
         $RolModel = new RolModel();
-
-        // Este debería ser el nombre del rol, como "Administrador"
         $rolNombre = $this->request->getPost('rol_nombre');
 
-        // Validación básica
-        if (empty($rolNombre)) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'El nombre del rol es obligatorio']);
-        }
+
 
         $data = [
-            'rol_nombre' => $rolNombre
+            'rol_nombre' => $rolNombre,
+            'rol_created_at' => date('Y-m-d H:i:s'),
+            'rol_estado' => 1, 
         ];
 
         // Insertar en la base de datos

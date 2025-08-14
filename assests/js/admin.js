@@ -133,6 +133,7 @@ $(document).ready(function () {
 
 $('#form-add-rol').on('submit', function (e) {
     e.preventDefault();
+    console.log($(this).serialize());
     let baseURL = window.document.location.origin + "/" + window.location.pathname.split("/")[1];
 
     $.ajax({
@@ -150,7 +151,7 @@ $('#form-add-rol').on('submit', function (e) {
             }
         },
         error: function (err) {
-            console.log('Error en la petición:', err);
+            console.log('Error en la petición:=====', err);
             alertify.error("Error al asignar el rol.");
         }
     });
