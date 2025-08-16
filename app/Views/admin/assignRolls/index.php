@@ -87,6 +87,7 @@ contra#_222z
 </head>
 
 <body>
+    <!-- asignar los Users a sus Roles -->
 
     <div class="wrapper">
         <div class="asignar-rol">
@@ -108,7 +109,7 @@ contra#_222z
                     <label for="role">Role</label>
                     <select name="role" id="role">
                         <option value="">Ninguno</option>
-                        <?php foreach ($roles as $role): ?>
+                        <?php foreach ($activeRol as $role): ?>
                             <option value="<?= esc($role['id_rol']) ?>">
                                 <?= esc($role['rol_nombre']) ?>
                             </option>
@@ -156,7 +157,7 @@ contra#_222z
                                         </form>
 
                                         <!--<form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="POST" );">-->
-                                        <button type="button" class="btnActualizar btn btn-warning btn-sm">Actualizar</button>
+                                        <button type="button" class="btnActualizarUserRol btn btn-warning btn-sm">Actualizar</button>
                                         <!--</form>-->
                                     </td>
                                 </tr>
@@ -194,6 +195,7 @@ contra#_222z
                         <tr>
                             <th>ID</th>
                             <th>Nombre del Rol</th>
+                            <th>Estado</th>
                             <th colspan="2">Acción</th>
                         </tr>
                     </thead>
@@ -202,15 +204,17 @@ contra#_222z
                         <?php if (!empty($roles)): ?>
                             <?php $contador = 1; ?>
                             <?php foreach ($roles as $row): ?>
-                                <tr>
+                                <tr data-id="<?= esc($row['id_rol']) ?>" data-nombre="<?= esc($row['rol_nombre']) ?>" data-estado="<?= esc($row['rol_estado']) ?>">
                                     <td><?= esc($contador) ?></td>
                                     <td><?= esc($row['rol_nombre']) ?></td>
+                                    <td><?= ($row['rol_estado'] == 1) ? 'Activo' : 'Inactivo'; ?></td>
 
                                     <!-- Hidden data for JS Add hidden inputs outside of <td> so you can access them via JS. -->
                                     <input type="hidden" class="id_rol" value="<?= esc($row['id_rol']) ?>">
+                                    <input type="hidden" class="rol_estado" value="<?= esc($row['rol_estado']) ?>">
 
                                     <td class="acciones">
-                                        <form 
+                                        <form
                                             class="form-delete-rol"
                                             action="<?= base_url('admin/deleteRol') ?>"
                                             method="POST">
@@ -218,7 +222,7 @@ contra#_222z
                                             <button type="submit" class="btn btn-danger px-4">Eliminar</button>
                                         </form>
 
-                                        <button type="button" class="btnActualizar btn btn-warning btn-sm">Actualizar</button>
+                                        <button id="btnActualizarRol" type="button" class="btnActualizarRol btn btn-warning btn-sm">Actualizar</button>
 
                                     </td>
                                 </tr>
@@ -235,7 +239,7 @@ contra#_222z
         </div>
     </div>
 
-    <!-- modal para editar -->
+    <!-- modal para editar modalAsignarRol -->
     <div class="modal fade" id="modalAsignarRol" tabindex="-1" aria-labelledby="modalAsignarRolLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
@@ -273,6 +277,50 @@ contra#_222z
                         </div>
                         <button type="submit">Actualizar</button>
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- modal para editar roles -->
+    <div class="modal fade" id="modalEditarRol" tabindex="-1" aria-labelledby="modalEditarRolLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalEditarRolLabel">Detalles del Rol</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <h2>Cambiar o modificar el rol</h2>
+                    <form id="form-edit-rol" >
+                        <input type="hidden" name="id_rol" id="edit_id_rol">
+
+                        <div class="form-group">
+                            <label for="edit_rol_nombre">Nombre del Rol</label>
+                            <input type="text" class="form-control rol_nombre"
+                                name="rol_nombre" id="edit_rol_nombre"
+                                placeholder="Ingrese el nombre del rol..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit_rol_estado">Estado</label>
+                            <select name="rol_estado" id="edit_rol_estado" class="form-control rol_estado">
+                                <option value="1">Activo</option>
+                                <option value="0">Desactivado</option>
+                            </select>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </form>
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

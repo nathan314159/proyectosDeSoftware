@@ -28,10 +28,11 @@ $routes->group('admin', function ($routes) {
     // $routes->get('editUserRol/(:num)', 'admin\AdminController::edit/$1');
     // $routes->get('updateUserRol/(:num)', 'admin\AdminController::update/$1');
      
-
      // Roles
     $routes->post('addRol', 'admin\AdminController::addRol');
     $routes->post('deleteRol', 'admin\AdminController::deleteRol');
+    $routes->post('updateRol', 'admin\AdminController::updateRol');
+    
 });
 
 

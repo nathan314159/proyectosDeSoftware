@@ -14,9 +14,15 @@ class RolModel extends Model
 
     public function showRols()
     {
-        $builder = $this->select("id_rol, rol_nombre");
-        $query = $builder->get();
-        return $query->getResultArray();
+        return $this->select("id_rol, rol_nombre, rol_estado")
+            ->findAll(); // trae todos (activos e inactivos)
+    }
+
+    public function showActiveRols()
+    {
+        return $this->select('id_rol, rol_nombre, rol_estado')
+            ->where('rol_estado', 1) // solo activos
+            ->findAll();
     }
 
     public function insertRoles($data)
@@ -31,5 +37,12 @@ class RolModel extends Model
         return $this->db->table('tbl_rol')
             ->where('id_rol', $id)
             ->update(['rol_estado' => $estado]);
+    }
+
+    public function updateRols($data, $id)
+    {
+        return $this->db->table('tbl_rol')
+            ->where('id_rol', $id)
+            ->update($data);
     }
 }

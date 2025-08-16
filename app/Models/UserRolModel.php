@@ -21,9 +21,17 @@ class UserRolModel extends Model
 
     public function showUserRol()
     {
-        return $this->select('tbl_user_rol.id_users_rol, tbl_user_rol.id_rol, tbl_user_rol.id_users, tbl_users.users_nombre, tbl_users.users_apellido, tbl_rol.rol_nombre, tbl_rol.id_rol')
+        return $this->select('
+        tbl_user_rol.id_users_rol, 
+        tbl_user_rol.id_rol, 
+        tbl_user_rol.id_users, 
+        tbl_users.users_nombre, 
+        tbl_users.users_apellido, 
+        tbl_rol.rol_nombre, 
+        tbl_rol.id_rol
+        ')
             ->join('tbl_users', 'tbl_users.id_users = tbl_user_rol.id_users')
-            ->join('tbl_rol', 'tbl_rol.id_rol = tbl_user_rol.id_rol') // OJO AQUÍ: tbl_rol (no tbl_roles)
+            ->join('tbl_rol', 'tbl_rol.id_rol = tbl_user_rol.id_rol')
             ->findAll();
     }
 

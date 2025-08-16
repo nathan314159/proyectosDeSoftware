@@ -18,13 +18,15 @@ class AdminController extends BaseController
         $UserRolModel = new UserRolModel();
 
         $user = $userModel->showUsers();
-        $rol = $rolModel->showRols();
+        $activeRol = $rolModel->showActiveRols();
         $userRoles = $UserRolModel->showUserRol();
+        $roles = $rolModel->showRols();
 
         $data = [
             "users" => $user,
-            "roles" => $rol,
+            "activeRol" => $activeRol,
             "userRoles" => $userRoles,
+            "roles" => $roles,
         ];
         // print_r(["userRoles" => $userRoles]);
         // dd($data);
@@ -105,9 +107,6 @@ class AdminController extends BaseController
         $id = $this->request->getPost('id_users_rol');
         $newRole = $this->request->getPost('role');
 
-        log_message('debug', 'ID recibido: ' . $id);
-        log_message('debug', 'Nuevo rol recibido: ' . $newRole);
-
         if (!$id || !$newRole) {
             return $this->response->setJSON(['status' => 'error', 'message' => 'Datos incompletos']);
         }
@@ -132,7 +131,7 @@ class AdminController extends BaseController
         $data = [
             'rol_nombre' => $rolNombre,
             'rol_created_at' => date('Y-m-d H:i:s'),
-            'rol_estado' => 1, 
+            'rol_estado' => 1,
         ];
 
         // Insertar en la base de datos
@@ -141,24 +140,57 @@ class AdminController extends BaseController
         return $this->response->setJSON(['status' => 'success', 'message' => 'Rol agregado correctamente']);
     }
 
-public function deleteRol()
-{
-    $id = $this->request->getPost('id_rol');
+    public function deleteRol()
+    {
+        $id = $this->request->getPost('id_rol');
 
-    // We want to set the role as inactive (soft delete)
-    $estado = 0;
+        // We want to set the role as inactive (soft delete)
+        $estado = 0;
 
-    $model = new RolModel();
-    $deleted = $model->deleteRols($estado, $id);
+        $model = new RolModel();
+        $deleted = $model->deleteRols($estado, $id);
 
-    if ($deleted) {
-        return $this->response->setJSON(['status' => 'success']);
-    } else {
-        return $this->response->setStatusCode(500)->setJSON([
-            'status' => 'error',
-            'message' => 'No se pudo cambiar el estado del rol'
-        ]);
+        if ($deleted) {
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON([
+                'status' => 'error',
+                'message' => 'No se pudo cambiar el estado del rol'
+            ]);
+        }
     }
-}
 
+
+    public function updateRol()
+    {
+        $id        = $this->request->getPost('id_rol');
+        $rolNombre = $this->request->getPost('rol_nombre');
+        $rolEstado = $this->request->getPost('rol_estado');
+
+        $data = [
+            'id_rol'     => $id,
+            'rol_nombre' => $rolNombre,
+            'rol_estado' => $rolEstado,
+        ];
+
+        $model = new RolModel();
+        $updated = $model->updateRols($data, $id);
+        if ($updated) {
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Rol actualizado correctamente']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON([
+                'status' => 'error',
+                'message' => 'No se pudo actualizar el rol'
+            ]);
+        }
+        // Dump for debugging if you want to stop execution
+        // dd($data);
+        //     return $this->response->setJSON([
+        //     'id' => $id,
+        //     'rol_nombre' => $rolNombre,
+        //     'rol_estado' => $rolEstado
+        // ]);
+
+
+    }
 }

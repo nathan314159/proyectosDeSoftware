@@ -70,7 +70,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-    $(".btnActualizar").click(function () {
+    $(".btnActualizarUserRol").click(function () {
         const row = $(this).closest("tr");
 
         const idUsersRol = row.find(".id_users_rol").val();
@@ -185,6 +185,64 @@ $(document).on('submit', '.form-delete-rol', function (e) {
 });
 
 
+$(document).on('click', '.btnActualizarRol', function (e) {
+    e.preventDefault();
+    const row = $(this).closest("tr");
+    const idRol = row.data("id");
+    const rolName = row.data("nombre");
+    const estado = row.data("estado");
 
+    // console.log("ID del rol:", idRol);
+    // console.log("Nombre del rol:", rolName);
+    // console.log("Estado del rol:", estado);
+
+    $("#edit_id_rol").val(idRol);
+    $("#edit_rol_nombre").val(rolName);
+    $("#edit_rol_estado").val(estado);
+
+    $("#modalEditarRol").modal("show");
+});
+
+
+$(document).on('submit', '#form-edit-rol', function (e) {
+    e.preventDefault();
+    let id = $("#edit_id_rol").val();
+    let rolNombre = $("#edit_rol_nombre").val();
+    let rolEstado = $("#edit_rol_estado").val();
+
+    let baseURL = window.document.location.origin + "/" + window.location.pathname.split("/")[1];
+    // console.log("ID del rol a actualizar:", id);
+    // console.log("Nombre del rol a actualizar:", rolNombre); 
+    // console.log("Estado del rol a actualizar:", rolEstado);
+    // console.log("baseURL:", baseURL);
+    $.ajax({
+        url: baseURL + '/admin/updateRol',
+        method: 'POST',
+        data: {
+            id_rol: id,
+            rol_nombre: rolNombre,
+            rol_estado: rolEstado
+        },
+        success: function (response) {
+            if (response.status === 'success') {
+                alertify.success("Rol actualizado exitosamente");
+
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                console.log('Error: ' + response.message);
+                console.log("Respuesta del servidor:", response);
+                console.log("ID:", response.id);
+                console.log("Rol Nombre:", response.rol_nombre);
+                console.log("Rol Estado:", response.rol_estado);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("Error al actualizar el rol: " + error);
+            console.log("xhr: " + xhr);
+            console.log("status: " + status);
+
+        }
+    });
+});
 
 
