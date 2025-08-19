@@ -239,6 +239,81 @@ contra#_222z
         </div>
     </div>
 
+    <!-- Crear Urls -->
+
+    <div class="wrapper">
+        <div class="asignar-rol">
+            <h2>Crear Url</h2>
+            <form>
+                <div class="container">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="url_nombre" id="url_nombre" placeholder="Nombre de la Url" required>
+                </div>
+
+                <div class="container">
+                    <label for="url">Url</label>
+                    <input type="text" name="url" id="url" placeholder="Ingrese la Url" required>
+
+                </div>
+
+                <button type="button" id="btnInsertarRol">Agregar Url</button>
+            </form>
+        </div>
+
+        <div class="asignar-roles-table">
+            <h2>Roles Asignados</h2>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuario</th>
+                            <th>Rol</th>
+                            <th colspan="2">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php if (!empty($userRoles)): ?>
+                            <?php $contador = 1; ?>
+                            <?php foreach ($userRoles as $row): ?>
+                                <tr>
+                                    <td><?= esc($contador) ?></td>
+                                    <td><?= esc($row['users_nombre']) . " " . esc($row['users_apellido']) ?></td>
+                                    <td><?= esc($row['rol_nombre']) ?></td>
+
+                                    <!-- Hidden data for JS Add hidden inputs outside of <td> so you can access them via JS. -->
+                                    <input type="hidden" class="id_users_rol" value="<?= esc($row['id_users_rol']) ?>">
+                                    <input type="hidden" class="id_users" value="<?= esc($row['id_users']) ?>">
+                                    <input type="hidden" class="id_rol" value="<?= esc($row['id_rol']) ?>">
+
+                                    <td class="acciones">
+                                        <form class="delete-form"
+                                            action="<?= base_url('admin/deleteUserRol') ?>"
+                                            method="GET">
+                                            <input type="hidden" name="id_users_rol" value="<?= esc($row['id_users_rol']) ?>">
+                                            <button type="submit" class="btn btn-danger px-4">Eliminar</button>
+                                        </form>
+
+                                        <!--<form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="POST" );">-->
+                                        <button type="button" class="btnActualizarUserRol btn btn-warning btn-sm">Actualizar</button>
+                                        <!--</form>-->
+                                    </td>
+                                </tr>
+                                <?php $contador++; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="2">No hay asignaciones de roles.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
     <!-- modal para editar modalAsignarRol -->
     <div class="modal fade" id="modalAsignarRol" tabindex="-1" aria-labelledby="modalAsignarRolLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -299,7 +374,7 @@ contra#_222z
 
                 <div class="modal-body">
                     <h2>Cambiar o modificar el rol</h2>
-                    <form id="form-edit-rol" >
+                    <form id="form-edit-rol">
                         <input type="hidden" name="id_rol" id="edit_id_rol">
 
                         <div class="form-group">

@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\RolModel;
 use App\Models\UserRolModel;
-use CodeIgniter\CLI\Console;
+use App\Models\FuncionalidadModel;
 
 class AdminController extends BaseController
 {
@@ -16,11 +16,13 @@ class AdminController extends BaseController
         $userModel = new UserModel();
         $rolModel = new RolModel();
         $UserRolModel = new UserRolModel();
+        // $rolModel = new FuncionalidadModel();
 
         $user = $userModel->showUsers();
         $activeRol = $rolModel->showActiveRols();
         $userRoles = $UserRolModel->showUserRol();
         $roles = $rolModel->showRols();
+
 
         $data = [
             "users" => $user,
@@ -192,5 +194,39 @@ class AdminController extends BaseController
         // ]);
 
 
+    }
+
+    // urls
+    public function assignUrls()
+    {
+        $url = $this->request->getPost('url');
+        $urlNombre = $this->request->getPost('url_nombre');
+        $FuncionalidadModel = new FuncionalidadModel();
+
+        $data = [
+            'funcionalidad_url' => $url,
+            'funcionalidad_nombre_funcion' => $urlNombre,
+            'funcionalidad_estado' => 1,
+        ];
+
+        $inserted = $FuncionalidadModel->insertFunctionality($data); // guardar el resultado
+
+        if ($inserted) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Funcionalidad agregada correctamente'
+            ]);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON([
+                'status' => 'error',
+                'message' => 'No se pudo agregar la funcionalidad'
+            ]);
+        }
+
+        // return $this->response->setJSON([
+        //     'funcionalidad_estado' => 1,
+        //     'funcionalidad_url' => $url,
+        //     'funcionalidad_nombre_funcion' => $urlNombre
+        // ]);
     }
 }

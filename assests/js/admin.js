@@ -246,3 +246,41 @@ $(document).on('submit', '#form-edit-rol', function (e) {
 });
 
 
+// Urls
+$(document).ready(function () {
+    $("#btnInsertarRol").on("click", function (e) {
+        e.preventDefault();
+
+        let urlNombre = $("#url_nombre").val();
+        let url = $("#url").val();
+
+        if (urlNombre === "" || url === "") {
+            alertify.error("Debes completar todos los campos.");
+            return;
+        }
+
+        let baseURL = window.document.location.origin + "/" + window.location.pathname.split("/")[1];
+        console.log("baseURL:", baseURL);
+        console.log("Nombre de la URL:", urlNombre);
+        console.log("URL:", url);
+
+        $.ajax({
+            url: baseURL + "/admin/assignUrls",
+            type: "POST",
+            data: {
+                url_nombre: urlNombre,
+                url: url
+            },
+            dataType: 'json',
+            success: function (response) {
+                alertify.success("Url agregada exitosamente");
+                // setTimeout(() => location.reload(), 1000);
+                console.log("Respuesta del servidor:", response);
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alertify.error('Error en la solicitud');
+            }
+        });
+    });
+});
