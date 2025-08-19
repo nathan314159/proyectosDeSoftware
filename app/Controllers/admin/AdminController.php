@@ -16,12 +16,13 @@ class AdminController extends BaseController
         $userModel = new UserModel();
         $rolModel = new RolModel();
         $UserRolModel = new UserRolModel();
-        // $rolModel = new FuncionalidadModel();
+        $funcModel = new FuncionalidadModel();
 
         $user = $userModel->showUsers();
         $activeRol = $rolModel->showActiveRols();
         $userRoles = $UserRolModel->showUserRol();
         $roles = $rolModel->showRols();
+        $urls = $funcModel->showfunctions();
 
 
         $data = [
@@ -29,6 +30,7 @@ class AdminController extends BaseController
             "activeRol" => $activeRol,
             "userRoles" => $userRoles,
             "roles" => $roles,
+            "urls" => $urls
         ];
         // print_r(["userRoles" => $userRoles]);
         // dd($data);

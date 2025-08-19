@@ -11,8 +11,8 @@ class FuncionalidadModel extends Model
 
     // Campos permitidos para insertar/actualizar
     protected $allowedFields = [
-        'funcionalidad_nombre_funcion', 
-        'funcionalidad_url', 
+        'funcionalidad_nombre_funcion',
+        'funcionalidad_url',
         'funcionalidad_estado'
     ];
 
@@ -21,11 +21,16 @@ class FuncionalidadModel extends Model
         return $this->insert($data);
     }
 
-    //     public function showUsers()
-    // {
-    //     $builder =$this->select("id_users, users_nombre, users_apellido, users_cedula");
-    //     $query = $builder->get();
-    //     return $query->getResultArray();
-    // }
-    
+    public function showfunctions()
+    {
+        $builder = $this->select(
+            "
+        id_funcionalidad,
+        funcionalidad_nombre_funcion, 
+        funcionalidad_url, 
+        funcionalidad_estado"
+        );
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
 }

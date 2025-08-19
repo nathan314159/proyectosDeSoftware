@@ -261,43 +261,37 @@ contra#_222z
         </div>
 
         <div class="asignar-roles-table">
-            <h2>Roles Asignados</h2>
+            <h2>Urls</h2>
             <div class="table-scroll">
                 <table>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Usuario</th>
-                            <th>Rol</th>
+                            <th>Nombres</th>
+                            <th>Urls</th>
+                            <th>Estado</th>
                             <th colspan="2">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        <?php if (!empty($userRoles)): ?>
+                        <?php if (!empty($urls)): ?>
                             <?php $contador = 1; ?>
-                            <?php foreach ($userRoles as $row): ?>
+                            <?php foreach ($urls as $row): ?>
                                 <tr>
                                     <td><?= esc($contador) ?></td>
-                                    <td><?= esc($row['users_nombre']) . " " . esc($row['users_apellido']) ?></td>
-                                    <td><?= esc($row['rol_nombre']) ?></td>
+                                    <td><?= esc($row['funcionalidad_nombre_funcion']) ?></td>
+                                    <td><?= esc($row['funcionalidad_url']) ?></td>
+                                    <td><?= esc($row['funcionalidad_estado']) ?></td>
 
                                     <!-- Hidden data for JS Add hidden inputs outside of <td> so you can access them via JS. -->
-                                    <input type="hidden" class="id_users_rol" value="<?= esc($row['id_users_rol']) ?>">
-                                    <input type="hidden" class="id_users" value="<?= esc($row['id_users']) ?>">
-                                    <input type="hidden" class="id_rol" value="<?= esc($row['id_rol']) ?>">
+                                    <input type="hidden" class="id_funcionalidad" id="id_funcionalidad" value="<?= esc($row['id_funcionalidad']) ?>">
 
                                     <td class="acciones">
-                                        <form class="delete-form"
-                                            action="<?= base_url('admin/deleteUserRol') ?>"
-                                            method="GET">
-                                            <input type="hidden" name="id_users_rol" value="<?= esc($row['id_users_rol']) ?>">
-                                            <button type="submit" class="btn btn-danger px-4">Eliminar</button>
-                                        </form>
-
-                                        <!--<form action="<?= base_url('admin/editUserRol/' . $row['id_users_rol']) ?>" method="POST" );">-->
-                                        <button type="button" class="btnActualizarUserRol btn btn-warning btn-sm">Actualizar</button>
-                                        <!--</form>-->
+                                        <!-- Eliminar -->
+                                        <button type="button" class="btnActualizarUrl btn btn-danger px-4">Eliminar</button>
+                                        <!-- Actualizar -->
+                                        <button type="button" class="btnActualizarUrl btn btn-warning btn-sm">Actualizar</button>
                                     </td>
                                 </tr>
                                 <?php $contador++; ?>
