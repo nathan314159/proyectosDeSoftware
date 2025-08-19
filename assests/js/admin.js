@@ -284,3 +284,34 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $(".btnEliminarUrl").on("click", function (e) {
+        e.preventDefault();
+
+        // Busca el input hidden dentro de la misma fila (tr) donde se hizo clic
+        let urlId = $(this).closest("tr").find(".id_funcionalidad").val();
+
+        let baseURL = window.document.location.origin + "/" + window.location.pathname.split("/")[1];
+        console.log("baseURL:", baseURL);
+        console.log("url Id:", urlId);
+
+        $.ajax({
+            url: baseURL + "/admin/deleteUrls",
+            type: "POST",
+            data: {
+                id_funcionalidad: urlId,
+            },
+            // dataType: 'json',
+            success: function (response) {
+                alertify.success("Url agregada exitosamente");
+                setTimeout(() => location.reload(), 1000);
+                console.log("Respuesta del servidor:", response);
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alertify.error('Error en la solicitud');
+            }
+        });
+    });
+});

@@ -33,4 +33,11 @@ class FuncionalidadModel extends Model
         $query = $builder->get();
         return $query->getResultArray();
     }
+
+    public function deleteFuncitonality($estado, $id)
+    {
+        return $this->db->table('tbl_funcionalidad')
+            ->where('id_funcionalidad', $id)
+            ->update(['funcionalidad_estado' => $estado]);
+    }
 }

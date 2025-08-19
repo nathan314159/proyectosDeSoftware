@@ -231,4 +231,22 @@ class AdminController extends BaseController
         //     'funcionalidad_nombre_funcion' => $urlNombre
         // ]);
     }
+
+    public function deleteUrls()
+    {
+        $id = $this->request->getPost('id_funcionalidad');
+        $estado = 0; // Cambiar el estado a inactivo
+
+        $model = new FuncionalidadModel();
+        $deleted = $model->deleteFuncitonality($estado, $id);
+
+        if ($deleted) {
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON([
+                'status' => 'error',
+                'message' => 'No se pudo cambiar el estado de la funcionalidad'
+            ]);
+        }
+    }
 }

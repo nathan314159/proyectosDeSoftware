@@ -35,6 +35,7 @@ $routes->group('admin', function ($routes) {
 
     // Urls
     $routes->post('assignUrls', 'admin\AdminController::assignUrls');
+    $routes->post('deleteUrls', 'admin\AdminController::deleteUrls');
     
 });
 

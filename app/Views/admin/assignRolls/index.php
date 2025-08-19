@@ -289,7 +289,7 @@ contra#_222z
 
                                     <td class="acciones">
                                         <!-- Eliminar -->
-                                        <button type="button" class="btnActualizarUrl btn btn-danger px-4">Eliminar</button>
+                                        <button type="button" class="btnEliminarUrl btn btn-danger px-4">Eliminar</button>
                                         <!-- Actualizar -->
                                         <button type="button" class="btnActualizarUrl btn btn-warning btn-sm">Actualizar</button>
                                     </td>
